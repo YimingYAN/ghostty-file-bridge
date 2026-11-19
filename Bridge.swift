@@ -6,7 +6,7 @@ app.setActivationPolicy(.accessory)
 var tap: CFMachPort?
 var busy = false
 var statusItem: NSStatusItem!
-let root = NSHomeDirectory() + "/Projects/ghostty-image-bridge"
+let root = NSHomeDirectory() + "/Projects/ghostty-file-bridge"
 
 func alert(_ text: String) {
     let a = NSAlert()
@@ -19,7 +19,7 @@ func context() throws -> (String, String) {
     var error: NSDictionary?
     let result = NSAppleScript(source: source)!.executeAndReturnError(&error)
     guard error == nil, let value = result.stringValue else {
-        throw NSError(domain: "Bridge", code: 1, userInfo: [NSLocalizedDescriptionKey: "Allow Ghostty Image Bridge to control Ghostty in System Settings → Privacy & Security → Automation."])
+        throw NSError(domain: "Bridge", code: 1, userInfo: [NSLocalizedDescriptionKey: "Allow Ghostty File Bridge to control Ghostty in System Settings → Privacy & Security → Automation."])
     }
     let fields = value.components(separatedBy: "|")
     guard fields.count == 2 else { throw NSError(domain: "Bridge", code: 2) }

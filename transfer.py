@@ -2,7 +2,7 @@
 """Upload to an explicitly recognized foreground SSH or mosh destination, then paste."""
 import ipaddress, json, os, re, shlex, subprocess, sys, uuid
 from pathlib import Path
-CONFIG = Path.home() / '.config/ghostty-image-bridge/hosts.json'
+CONFIG = Path.home() / '.config/ghostty-file-bridge/hosts.json'
 try:
     HOSTS = set(json.loads(CONFIG.read_text())['hosts'])
 except (FileNotFoundError, KeyError, TypeError, ValueError):
@@ -42,7 +42,7 @@ def target(command):
         raise RuntimeError('The focused terminal is not a supported direct SSH or mosh session')
     # Never infer a destination from an IP, title, or arbitrary remote output.
     if destination.startswith('-') or destination not in HOSTS:
-        raise RuntimeError('Use plain ssh or mosh with a destination listed in ~/.config/ghostty-image-bridge/hosts.json')
+        raise RuntimeError('Use plain ssh or mosh with a destination listed in ~/.config/ghostty-file-bridge/hosts.json')
     return destination
 
 def upload(host, path):

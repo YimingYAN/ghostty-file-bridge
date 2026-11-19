@@ -20,14 +20,14 @@ This is an independent community project, not an official Ghostty plugin. The im
 brew install uv
 brew install --cask ghostty
 mkdir -p ~/Projects
-git clone https://github.com/YimingYAN/ghostty-image-bridge.git ~/Projects/ghostty-image-bridge
-cd ~/Projects/ghostty-image-bridge
+git clone https://github.com/YimingYAN/ghostty-file-bridge.git ~/Projects/ghostty-file-bridge
+cd ~/Projects/ghostty-file-bridge
 ./install.sh
 ```
 
 Keep the repository at this path: the app loads its worker from it. The installer creates a private Python 3.13 environment, compiles and ad-hoc signs the app, and enables login startup. No remote service is installed.
 
-Edit `~/.config/ghostty-image-bridge/hosts.json` to allow your exact SSH destinations:
+Edit `~/.config/ghostty-file-bridge/hosts.json` to allow your exact SSH destinations:
 
 ```json
 {
@@ -35,7 +35,7 @@ Edit `~/.config/ghostty-image-bridge/hosts.json` to allow your exact SSH destina
 }
 ```
 
-Allow **Ghostty Image Bridge** in **System Settings → Privacy & Security → Accessibility**. If it is missing, add `~/Applications/Ghostty Image Bridge.app`. On first file or image paste, allow it to control Ghostty under **Automation**. These permissions must be granted separately on each Mac. Rebuilding the app may require granting them again.
+Allow **Ghostty File Bridge** in **System Settings → Privacy & Security → Accessibility**. If it is missing, add `~/Applications/Ghostty File Bridge.app`. On first file or image paste, allow it to control Ghostty under **Automation**. These permissions must be granted separately on each Mac. Rebuilding the app may require granting them again.
 
 ## Use
 
@@ -47,7 +47,7 @@ Allow **Ghostty Image Bridge** in **System Settings → Privacy & Security → A
 
 In a local terminal, **⌘V** follows Ghostty’s normal paste behavior, including pasting copied file paths, without an SSH warning.
 
-The menu displays **Ghostty File Bridge**. The installed app remains **Ghostty Image Bridge.app**, and configuration and cache paths retain their original names for compatibility.
+The project was previously named Ghostty Image Bridge. The installer copies an existing `~/.config/ghostty-image-bridge/hosts.json` to the new path. Remove the old `~/Applications/Ghostty Image Bridge.app` and its `org.ghosttyimagebridge.app` LaunchAgent yourself.
 
 Uploads remain in `~/.cache/clipboard-images/` on the remote host. Remove them when no longer needed.
 
@@ -89,10 +89,10 @@ Clone this repository to the same path, copy your private `hosts.json` separatel
 Quit the app from its menu bar. Disable login startup with:
 
 ```sh
-launchctl bootout "gui/$(id -u)/org.ghosttyimagebridge.app"
+launchctl bootout "gui/$(id -u)/org.ghosttyfilebridge.app"
 ```
 
-Then remove `~/Library/LaunchAgents/org.ghosttyimagebridge.app.plist` and `~/Applications/Ghostty Image Bridge.app` using Finder. Keep the source and private config if you plan to reinstall.
+Then remove `~/Library/LaunchAgents/org.ghosttyfilebridge.app.plist` and `~/Applications/Ghostty File Bridge.app` using Finder. Keep the source and private config if you plan to reinstall.
 
 ## Development
 
